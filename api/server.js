@@ -1,24 +1,27 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const routes = require('./routes');
+const mongoose = require('mongoose');
+const auth = require('../middlewares/auth');
 
-const db = ''; //coloque sua URL do MongoDB aqui
-const port = process.env.PORT || 8080;
+const db = process.env.MONGODB_URL
+const port = process.env.PORT || 3000;
+const JWT_SECRET = 'sshhhhhitsasecret'
 
-mongoose.connect(db, { useNewUrlParser: true });
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
+const authMiddleware = auth(JWT_SECRET)
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json());
 
 const apiRoutes = express.Router();
-apiRoutes.get('/api/posts', routes.getPosts);
-apiRoutes.post('/api/users', routes.createUsers);
-apiRoutes.post('/api/login', routes.login);
+apiRoutes.get('/posts', routes.getPosts);
+apiRoutes.post('/users', routes.createUsers);
+apiRoutes.post('/products', authMiddleware, routes.createProduct);
+apiRoutes.post('/login', routes.login(JWT_SECRET));
+apiRoutes.post('/renew', authMiddleware, routes.renewToken(JWT_SECRET));
 
-app.use(apiRoutes);
+app.use('/api', apiRoutes);
 
 app.listen(port);
-console.log('conectado na porta ' + port);
+console.log(`Ouvindo na porta ${port}`);

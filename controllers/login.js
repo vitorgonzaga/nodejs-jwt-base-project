@@ -1,14 +1,32 @@
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-module.exports = async (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
+function removePassword ({ password, ...user }) {
+  return user
+}
 
-  if (!username || !password) return res.send(401);
+module.exports = (secret) => async (req, res) => {
+  try {
+    const username = req.body.username;
+    const password = req.body.password;
 
-  const user = await User.findOne({ username });
+    if (!username || !password) return res.send(401);
 
-  if (!user) res.status(401).json(false);
+    const rawUser = await User.findOne({ username });
 
-  res.status(200).json(true);
+    if (!rawUser) res.status(401).json({ message: 'invalid login / password' });
+
+    const user = removePassword(rawUser.toObject())
+
+    const jwtConfig = {
+      expiresIn: '15m',
+      algorithm: 'HS256'
+    }
+
+    const token = jwt.sign({ data: user }, secret, jwtConfig)
+
+    res.status(200).json({ token });
+  } catch (err) {
+    next(err);
+  }
 };

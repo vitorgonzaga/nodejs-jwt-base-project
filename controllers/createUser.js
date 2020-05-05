@@ -7,7 +7,9 @@ module.exports = (req, res) => {
   });
 
   data.save().then((doc) => {
-    res.status(201).json({ message: 'Novo usuário', data: doc });
+    const { password, ...newUser } = doc.toObject()
+
+    res.status(201).json({ message: 'Novo usuário', data: newUser });
   }).catch(err => {
     res.status(500).send('Erro ao salvar o usuário no banco', err);
   });
