@@ -1,14 +1,16 @@
-const Model = require('../models/user');
+const User = require('../models/user');
 
-module.exports = (req, res) => {
-  const data = new Model({
-    username: req.body.username,
-    password: req.body.password,
-  });
+module.exports = async (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
 
-  data.save().then((doc) => {
-    res.status(201).json({ message: 'Novo usuário', data: doc });
-  }).catch(err => {
-    res.status(500).send('Erro ao salvar o usuário no banco', err);
-  });
+  if (!username || !password) return res.send(401);
+
+  const model = new User();
+  
+  const user = await model.createUser(username, password);
+
+  if(!user) return res.status(500).send('Erro ao salvar o usuário no banco', err);
+
+  return res.status(201).json({ message: 'Novo usuário', data: user.ops[0] });
 };
