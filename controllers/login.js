@@ -1,4 +1,7 @@
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+
+const JWT_SECRET = 'shhhhhitsasecret!';
 
 module.exports = async (req, res) => {
   const username = req.body.username;
@@ -10,5 +13,14 @@ module.exports = async (req, res) => {
 
   if (!user) res.status(401).json(false);
 
-  res.status(200).json(true);
+  const signOptions = {
+    algorithm: 'HS256',
+    expiresIn: '15m'
+  };
+
+  const { password: _, ...userWithoutPassword } = user.toObject();
+
+  const token = jwt.sign(userWithoutPassword, JWT_SECRET, signOptions);
+
+  res.status(200).json({ token });
 };
