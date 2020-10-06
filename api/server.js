@@ -1,12 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const routes = require('./routes');
 
-const db = ''; //coloque sua URL do MongoDB aqui
 const port = process.env.PORT || 8080;
-
-mongoose.connect(db, { useNewUrlParser: true });
 
 const app = express();
 
