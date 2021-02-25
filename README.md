@@ -15,15 +15,13 @@ Abaixo, está a estrutura base do projeto. Ele implementa uma API em NodeJS e Ex
  
 ```
 ├── README.md
-├── api
-│  ├── routes.js
-│  └── server.js
 ├── controllers
 │  ├── createUser.js
 │  ├── login.js
 │  └── posts.js
 ├── models
 │  └── user.js
+├── index.js
 ├── package-lock.json
 └── package.json
 ```
