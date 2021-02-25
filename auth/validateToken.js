@@ -1,11 +1,13 @@
 const jwt = require('jsonwebtoken');
 
-const secret = 'changeme123';
+const secret = 'nosso segredo do jwt';
 
-module.exports = (token) => {
+const validateToken = (token) => {
   try {
     return jwt.verify(token, secret);
-  } catch (e) {
+  } catch (_e) {
     return null;
   }
 }
+
+module.exports = validateToken;

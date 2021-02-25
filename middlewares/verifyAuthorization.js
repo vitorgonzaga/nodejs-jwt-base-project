@@ -1,11 +1,13 @@
 const validateToken = require('../auth/validateToken');
 
-module.exports = (req, res, next) => {
-  const { authorization } = req.headers;
+const verifyAuthorization = (req, res, next) => {
+  const { authorization: token } = req.headers;
 
-  const payload = validateToken(authorization);
+  const payload = validateToken(token);
 
-  if (!payload) return res.status(200).json({ message: "Não autorizado!"});
+  if (!payload) return res.status(500).json({ message: 'Não autorizado'});
 
   next();
 }
+
+module.exports = verifyAuthorization;

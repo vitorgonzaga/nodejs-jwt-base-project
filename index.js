@@ -4,10 +4,10 @@ const { getPosts, login, createUsers } = require('./controllers');
 const verifyAuthorization = require('./middlewares/verifyAuthorization');
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/api/posts', verifyAuthorization, getPosts);
+app.get('/api/foo', verifyAuthorization, (req, res) => res.status(200).send("foo"));
 app.post('/api/users', createUsers);
 app.post('/api/login', login);
 
