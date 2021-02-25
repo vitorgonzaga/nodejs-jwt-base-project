@@ -1,16 +1,11 @@
-const Model = require('../models/user');
+const User = require('../models/user');
 
 module.exports = async (req, res) => {
-  try {
-    const username = await Model.registerUser(
-      req.body.username,
-      req.body.password
-    );
-    if (!username) throw Error;
-    res.status(201).json({ message: 'Novo usuário', user: username });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ message: 'Erro ao salvar o usuário no banco', error: err });
-  }
+  const { username, password } = req.body; 
+  
+  if (!username) res.status(500).json({ message: 'Erro ao salvar o usuário no banco' });;
+  
+  await User.registerUser(username, password);
+  
+  res.status(201).json({ message: 'Novo usuário cadastrado com sucesso!' });
 };
