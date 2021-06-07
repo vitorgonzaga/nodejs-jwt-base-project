@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
       req.body.password
     );
     if (!username) throw Error;
-    res.status(201).json({ message: 'Novo usuário', user: username });
+    res.status(201).json({ message: 'Novo usuário criado com sucesso', user: username });
   } catch (err) {
     res
       .status(500)

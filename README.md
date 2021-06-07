@@ -1,4 +1,4 @@
-Esse projeto é uma API base para ser utilizada na [aula sobre JWT](https://course.betrybe.com/back-end/nodejs/jwt/) do curso de NodeJS da Trybe.
+Esse projeto é uma API base para ser utilizada na aula `Testando APIs com Testes de Integração` do curso de NodeJS da Trybe.
 
 ##  Baixando o projeto
 
@@ -6,24 +6,30 @@ No seu terminal, cmd, power shell ou bash execute os seguintes comandos:
 
 - `git clone https://github.com/tryber/nodejs-jwt-base-project.git`
 - `cd nodejs-jwt-base-project`
+- `git checkout block-28-3`
 - `npm i`
-- `node api/server.js`
+- `npm run test:coverage`
 
 ## Estrutura base do projeto
 
-Abaixo, está a estrutura base do projeto. Ele implementa uma API em NodeJS e Express  que permite criar usuários, listar posts e fazer login. O projeto base contém uma autenticação simples. Durante a aula, é mostrado como adicionar à API autenticação via JWT.
+Abaixo, está a estrutura base do projeto. Ele implementa uma API em NodeJS e Express  que permite criar usuários, listar posts e fazer login. Aqui, é possível realizar o teste de integração do projeto.
  
 ```
 ├── README.md
-├── api
-│  ├── routes.js
-│  └── server.js
-├── controllers
-│  ├── createUser.js
-│  ├── login.js
-│  └── posts.js
-├── models
-│  └── user.js
+├── src
+│   ├── api
+│   │   ├── app.js
+│   │   ├── routes.js
+│   │   └── server.js
+│   ├── controllers
+│   │   ├── createUser.js
+│   │   ├── login.js
+│   │   └── posts.js
+│   └── models
+│       ├── connection.js
+│       └── user.js
+└── tests
+│   └── createUsers.test.js
 ├── package-lock.json
 └── package.json
 ```
@@ -34,10 +40,10 @@ Modelos são responsáveis por fazer o mapeamento entre as entidades que sua apl
 
 Estão organizados dentro da pasta `models`. No momento, só há o modelo de usuário (`user.js`), mas poderíamos definir modelos para diversas outras entidades, como posts, comentários etc.
 
-### Controlers
+### Controllers
 
 Controllers são as funções utilizadas como callbacks na definição de rotas.
-Eles são resposáveis por lidar com as requisições que chegam nas diferentes rotas de sua aplicação, executando regras de negócio e criando a resposta que será enviada para o cliente. Normalmente, interagem com um ou mais modelos para ler/escrever dados do banco de dados.
+Eles são responsáveis por lidar com as requisições que chegam nas diferentes rotas de sua aplicação, executando regras de negócio e criando a resposta que será enviada para o cliente. Normalmente, interagem com um ou mais modelos para ler/escrever dados do banco de dados.
 
 A API possui três controllers:
 
@@ -50,7 +56,11 @@ A API possui três controllers:
 ### `api/routes.js`
 
 Esse é um arquivo que concentra os controllers do projeto.
- 
+
+### `api/app.js`
+
+Onde todas as rotas são configuradas. 
+
 ### `api/server.js`
 
-Aqui é onde é criado de fato a API com o Express. Também é onde todas as rotas são configuradas.
+Aqui é onde é criado o server com o Express.

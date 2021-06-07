@@ -2,8 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
 
-const port = process.env.PORT || 8080;
-
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -16,5 +14,4 @@ apiRoutes.post('/api/login', routes.login);
 
 app.use(apiRoutes);
 
-app.listen(port);
-console.log('conectado na porta ' + port);
+module.exports = app;
