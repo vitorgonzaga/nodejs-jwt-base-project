@@ -7,7 +7,7 @@ No seu terminal, cmd, power shell ou bash execute os seguintes comandos:
 - `git clone https://github.com/tryber/nodejs-jwt-base-project.git`
 - `cd nodejs-jwt-base-project`
 - `npm i`
-- `node api/server.js`
+- `npm run dev`
 
 ## Estrutura base do projeto
 
