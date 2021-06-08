@@ -1,6 +1,6 @@
 const connect = require('./connection');
 
-const registerUser = async (username, password) => {
+const insertUser = async (username, password) => {
   const db = await connect();
   const result = db.collection('users').insertOne({ username, password });
   return result;
@@ -12,4 +12,4 @@ const findUser = async (username) => {
   return result;
 }
 
-module.exports = { registerUser, findUser };
+module.exports = { insertUser, findUser };

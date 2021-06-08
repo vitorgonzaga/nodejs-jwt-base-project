@@ -1,18 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const login = require('./controllers/posts');
-const getPosts = require('./controllers/posts');
-const createUsers = require('./controllers/posts');
+const { getPosts } = require('./controllers/posts');
+const { createUser } = require('./controllers/users');
+const { login } = require('./controllers/login');
 
 const app = express();
 
-// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.post('/api/login', login);
 app.get('/api/posts', getPosts);
-app.post('/api/users', createUsers);
+app.post('/api/users', createUser);
+app.post('/api/login', login);
 
 const PORT = 3000;
 
