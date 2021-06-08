@@ -17,6 +17,8 @@ const mockPosts = [
   },
 ];
 
-module.exports = (req, res, next) => {
-  res.status(200).json({ mockPosts });
-};
+const getPosts = (_req, res) => {
+  return res.status(200).json({ mockPosts });
+}
+
+module.exports = getPosts;

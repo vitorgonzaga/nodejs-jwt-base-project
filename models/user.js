@@ -1,9 +1,15 @@
 const connect = require('./connection');
 
-const registerUser = async (username, password) =>
-  connect().then((db) => db.collection('users').insertOne({ username, password }));
+const registerUser = async (username, password) => {
+  const db = await connect();
+  const result = db.collection('users').insertOne({ username, password });
+  return result;
+}
 
-const findUser = async (username) =>
-  connect().then((db) => db.collection('users').findOne({ username }));
+const findUser = async (username) => {
+  const db = await connect();
+  const result = db.collection('users').findOne({ username });
+  return result;
+}
 
 module.exports = { registerUser, findUser };

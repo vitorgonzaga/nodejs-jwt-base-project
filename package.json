@@ -1,9 +1,9 @@
 {
   "name": "api-jwt",
   "version": "1.0.0",
-  "main": "api/server.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "nodemon api/server.js"
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
