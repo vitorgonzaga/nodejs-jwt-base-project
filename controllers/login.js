@@ -5,7 +5,7 @@ const login = async (req, res) => {
     const { username = '', password = '' } = req.body;
     const result = await findUserService(username, password);
     
-    return res.status(result.status).json({ message: result.message });
+    return res.status(200).json(result);
   } catch (e) {
     return res.status(500).json({ message: 'Erro interno', error: e });
   }

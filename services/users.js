@@ -1,4 +1,12 @@
+const jwt = require('jsonwebtoken');
 const { findUser, insertUser } = require('../models/users');
+
+const SECRET = process.env.JWT_SECRET
+
+const jwtConfig = {
+  expiresIn: '15m',
+  algorithm: 'HS256'
+}
 
 const findUserService = async (username, password) => {
   if (!username || !password) return (
@@ -11,7 +19,11 @@ const findUserService = async (username, password) => {
     { status: 401, message: 'Usuário não existe ou senha inválida' }
   );
 
-  return ({ status: 200, message: 'Login efetuado com sucesso' })
+  const { password: _, ...userWithoutPassword } = userSearch;
+
+  const token = jwt.sign(userWithoutPassword, SECRET, jwtConfig);
+
+  return { token };
 };
 
 const createUserService = async (username, password) => {
