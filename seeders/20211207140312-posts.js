@@ -3,34 +3,24 @@ module.exports = {
     await queryInterface.bulkInsert('Posts',
       [{
         id: 1,
-        title: 'Título 1',
-        content: 'Meu primeiro post.',
+        title: 'título fake',
+        content: 'conteúdo conteúdo conteúdo conteúdo conteúdo',
       },
       {
         id: 2,
-        title: 'Titulo 2',
-        content: 'Meu segundo post.',
+        title: 'título fake',
+        content: 'conteúdo conteúdo conteúdo conteúdo conteúdo',
       },
       {
         id: 3,
-        title: 'Título 3',
-        content: 'Meu terceiro post.',
+        title: 'título fake',
+        content: 'conteúdo conteúdo conteúdo conteúdo conteúdo',
       },
       {
         id: 4,
-        title: 'Título 4',
-        content: 'Meu quarto post',
-      },{
-        id: 5,
-        title: 'Título 5',
-        content: 'Meu quinto post',
-      },
-      {
-        id: 6,
-        title: 'Titulo 6',
-        content: 'Meu último post',
-      },
-      ], { timestamps: false });
+        title: 'título fake',
+        content: 'conteúdo conteúdo conteúdo conteúdo conteúdo',
+      }], { timestamps: false });
   },
 
   down: async (queryInterface, _Sequelize) => {
