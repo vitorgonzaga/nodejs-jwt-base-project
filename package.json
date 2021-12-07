@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "./api/server.js",
   "scripts": {
+    "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate $",
     "dev": "nodemon ."
   },
   "dependencies": {
