@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const { User } = require('../models');
 
 module.exports = async (req, res) => {
   try {
@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
   if (!username || !password)
     return res.status(401).json({ message: 'É necessário usuário e senha para fazer login' });
 
-  const user = await User.findUser(username);
+  const user = await User.findOne({ username });
 
   if (!user || user.password !== password)
     return res.status(401).json({ message: 'Usuário não existe ou senha inválida' });
