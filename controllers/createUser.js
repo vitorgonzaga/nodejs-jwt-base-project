@@ -1,9 +1,10 @@
-const Model = require('../models/user');
+const { User } = require('../models');
 
 module.exports = async (req, res) => {
   try {
     const { username, password } = req.body;
-    const user = await Model.registerUser(username, password);
+    console.log(username, password)
+    const user = await User.create({username, password});
 
     if (!user) throw Error;
 
