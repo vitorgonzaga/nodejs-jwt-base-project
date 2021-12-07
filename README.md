@@ -11,19 +11,31 @@ No seu terminal, cmd, power shell ou bash execute os seguintes comandos:
 
 ## Estrutura base do projeto
 
-Abaixo, está a estrutura base do projeto. Ele implementa uma API em NodeJS e Express  que permite criar usuários, listar posts e fazer login. O projeto base contém uma autenticação simples. Durante a aula, é mostrado como adicionar à API autenticação via JWT.
+Abaixo, está a estrutura base do projeto. Ele implementa uma API em NodeJS e Express que permite criar usuários, listar posts e fazer login. O projeto base contém uma autenticação simples. Durante a aula, é mostrado como adicionar à API autenticação via JWT.
  
 ```
 ├── README.md
 ├── api
 │  ├── routes.js
 │  └── server.js
+├── config
+│  └── config.js
 ├── controllers
 │  ├── createUser.js
+│  ├── getUsers.js  
 │  ├── login.js
 │  └── posts.js
+├── migrations
+│  ├── users.js
+│  └── posts.js  
 ├── models
-│  └── user.js
+│  ├── index.js
+│  ├── Post.js
+│  └── User.js
+├── seeders
+│  ├── users.js
+│  └── posts.js
+├── .env
 ├── package-lock.json
 └── package.json
 ```
@@ -32,16 +44,30 @@ Abaixo, está a estrutura base do projeto. Ele implementa uma API em NodeJS e Ex
 
 Modelos são responsáveis por fazer o mapeamento entre as entidades que sua aplicação manipula e a camada de dados. Contêm todas as interações responsáveis por ler e escrever dados no seu banco de dados.
 
-Estão organizados dentro da pasta `models`. No momento, só há o modelo de usuário (`user.js`), mas poderíamos definir modelos para diversas outras entidades, como posts, comentários etc.
+Estão organizados dentro da pasta `models`.
 
-### Controlers
+### Migrations
+
+Migrations são responsáveis por criar e/ou restaurar as alterações no banco de dados.
+
+Estão organizados dentro da pasta `migrations` e há uma migration para cada tabela no banco de dados. No exemplo, existem as tabelas `Users` e `Posts`.
+
+### Seeders
+
+Seeders são responsáveis por povoar os dados das tabelas do banco de dados.
+
+Estão organizadas dentro da pasta `seeders`. No exemplo, existem seeders para as tabelas `Users` e `Posts`.
+
+### Controllers
 
 Controllers são as funções utilizadas como callbacks na definição de rotas.
 Eles são resposáveis por lidar com as requisições que chegam nas diferentes rotas de sua aplicação e criando a resposta que será enviada para o cliente. Normalmente, interagem com um ou mais modelos para ler/escrever dados do banco de dados.
 
-A API possui três controllers:
+A API possui quatro controllers:
 
   - `createUser.js`: Lida com a criação de novo usuários.
+
+  - `getUsers.js`: Encontra os usuários cadastrados.
   
   - `login.js`: Responsável pela lógica de login.
 
@@ -54,3 +80,8 @@ Esse é um arquivo que concentra os controllers do projeto.
 ### `api/server.js`
 
 Aqui é onde é criado de fato a API com o Express. Também é onde todas as rotas são configuradas.
+
+### `.env`
+
+Este arquivo é responsável por guardar os dados sensíveis do servidor. Este arquivo deve ser editado com as credencias MySQL da pessoa desenvolvedora. Neste exemplo, está sendo utilizado o usuário `root` com senha inexistente.
+**Lembre-se de editar este arquivo com as suas credencias.**
