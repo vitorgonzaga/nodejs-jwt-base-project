@@ -1,25 +1,25 @@
 require('dotenv').config();
 
-[{
+module.exports = {
   development: {
-    username: SQL_USERNAME,
-    password: SQL_PASSWORD,
-    database: SQL_HOST,
-    host: SQL_DB,
-    dialect: "mysql"
+    username: process.env.SQL_USERNAME,
+    password: process.env.SQL_PASSWORD,
+    database: 'jwt_exercise',
+    host: process.env.SQL_HOST,
+    dialect: 'mysql',
   },
   test: {
-    username: SQL_USERNAME,
-    password: SQL_PASSWORD,
-    database: SQL_HOST,
-    host: SQL_DB,
-    dialect: "mysql"
+    username: process.env.SQL_USERNAME,
+    password: process.env.SQL_PASSWORD,
+    database: 'jwt_exercise',
+    host: process.env.SQL_HOST,
+    dialect: 'mysql',
   },
   production: {
-    username: SQL_USERNAME,
-    password: SQL_PASSWORD,
-    database: SQL_HOST,
-    host: SQL_DB,
-    dialect: "mysql"
-  }
-}]
+    username: process.env.SQL_USERNAME,
+    password: process.env.SQL_PASSWORD,
+    database: 'jwt_exercise',
+    host: process.env.SQL_HOST,
+    dialect: 'mysql',
+  },
+};
