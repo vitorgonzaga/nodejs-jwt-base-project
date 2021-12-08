@@ -1,6 +1,6 @@
 Esse projeto é uma API base para ser utilizada na [aula sobre JWT](https://app.betrybe.com/course/back-end/autenticacao-e-upload-de-arquivos/nodejs-jwt-json-web-token/acf1c24f-d531-4cf0-be9b-2384e37799d7/) do curso de NodeJS da Trybe.
 
-##  Baixando o projeto
+## Baixando o projeto
 
 No seu terminal, cmd, power shell ou bash execute os seguintes comandos:
 
@@ -8,6 +8,12 @@ No seu terminal, cmd, power shell ou bash execute os seguintes comandos:
 - `cd nodejs-jwt-base-project`
 - `npm i`
 - `npm run dev`
+
+## Preparando o ambiente
+
+- Edite o arquivo `.env` com as suas credenciais SQL;
+- No seu terminal, execute o comando `npm run prestart`;
+- O comando acima irá criar o banco de dados `jwt_exercises` e povoar as tabelas `Users` e `Posts`.
 
 ## Estrutura base do projeto
 
