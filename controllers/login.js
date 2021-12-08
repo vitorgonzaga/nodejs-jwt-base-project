@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
   if (!username || !password)
     return res.status(401).json({ message: 'É necessário usuário e senha para fazer login' });
 
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ where: { username } });
 
   if (!user || user.password !== password)
     return res.status(401).json({ message: 'Usuário não existe ou senha inválida' });
