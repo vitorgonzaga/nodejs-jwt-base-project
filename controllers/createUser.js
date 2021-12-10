@@ -1,13 +1,14 @@
-const Model = require('../models/user');
+const { User } = require('../models');
 
 module.exports = async (req, res) => {
   try {
     const { username, password } = req.body;
-    const user = await Model.registerUser(username, password);
+    console.log(username, password)
+    const user = await User.create({username, password});
 
     if (!user) throw Error;
 
-    res.status(201).json({ message: 'Novo usuário criado com sucesso', user });
+    res.status(201).json({ message: 'Novo usuário criado com sucesso', user: username });
   } catch (err) {
     res
       .status(500)
