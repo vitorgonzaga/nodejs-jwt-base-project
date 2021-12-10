@@ -7,13 +7,13 @@ No seu terminal, cmd, power shell ou bash execute os seguintes comandos:
 - `git clone git@github.com:tryber/nodejs-jwt-base-project.git`
 - `cd nodejs-jwt-base-project`
 - `npm i`
-- `npm run dev`
 
 ## Preparando o ambiente
 
-- Edite o arquivo `.env` com as suas credenciais SQL;
-- No seu terminal, execute o comando `npm run prestart`;
-- O comando acima irá criar o banco de dados `jwt_exercises` e povoar as tabelas `Users` e `Posts`.
+- Faça uma cópia do arquivo `.env.example`, criando um arquivo `.env` com as suas credenciais SQL;
+- No seu terminal, execute o comando `npm start`;
+  - Esse comando vai, automaticamente, rodar o script de `prestart`, que inicializará o banco com o `sequelize`.
+- O comando acima irá criar o banco de dados `jwt_exercises_dev` e povoar as tabelas `Users` e `Posts`.
 
 ## Estrutura base do projeto
 
@@ -41,7 +41,7 @@ Abaixo, está a estrutura base do projeto. Ele implementa uma API em NodeJS e Ex
 ├── seeders
 │  ├── users.js
 │  └── posts.js
-├── .env
+├── .env.example
 ├── package-lock.json
 └── package.json
 ```
@@ -67,7 +67,7 @@ Estão organizadas dentro da pasta `seeders`. No exemplo, existem seeders para a
 ### Controllers
 
 Controllers são as funções utilizadas como callbacks na definição de rotas.
-Eles são resposáveis por lidar com as requisições que chegam nas diferentes rotas de sua aplicação e criando a resposta que será enviada para o cliente. Normalmente, interagem com um ou mais modelos para ler/escrever dados do banco de dados.
+Eles são responsáveis por lidar com as requisições que chegam nas diferentes rotas de sua aplicação e criando a resposta que será enviada para o cliente. Normalmente, interagem com um ou mais modelos para ler/escrever dados do banco de dados.
 
 A API possui quatro controllers:
 
@@ -87,7 +87,8 @@ Esse é um arquivo que concentra os controllers do projeto.
 
 Aqui é onde é criado de fato a API com o Express. Também é onde todas as rotas são configuradas.
 
-### `.env`
+### `.env.example` -> `.env`
 
 Este arquivo é responsável por guardar os dados sensíveis do servidor. Este arquivo deve ser editado com as credencias MySQL da pessoa desenvolvedora. Neste exemplo, está sendo utilizado o usuário `root` com senha inexistente.
-**Lembre-se de editar este arquivo com as suas credencias.**
+**⚠️ O arquivo `.env` arquivo não deve ser commitado na esmagadora parte das vezes, pois armazena dados sensíveis. **
+**⚠️ Lembre-se de editar este arquivo com as suas credencias.**
