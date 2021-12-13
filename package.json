@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "prestart": "npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all",
+    "start": "nodemon ."
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
