@@ -1,4 +1,3 @@
-// const { findUser, insertUser } = require('../models/users');
 const { User } = require('../models');
 
 const findUserService = async (username, password) => {
@@ -6,7 +5,6 @@ const findUserService = async (username, password) => {
     { status: 401, message: 'É necessário usuário e senha para fazer login' }
   );
 
-  // const userSearch = await findUser(username);
   const userSearch = await User.findOne({ where: { username } });
 
   if (!userSearch || userSearch.password !== password) return (
@@ -21,7 +19,6 @@ const createUserService = async (username, password) => {
     { status: 500, message: 'Erro ao salvar o usuário no banco' }
   );
 
-  // await insertUser(username, password);
   await User.create({ username, password });
 
   return ({ status: 201, message: 'Novo usuário cadastrado com sucesso!' });
