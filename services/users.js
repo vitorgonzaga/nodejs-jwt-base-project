@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const { User } = require('../models');
 
 /* Aqui temos nossa chave privada, é com ela que os dados do seu usuário serão encriptados.
@@ -25,9 +26,15 @@ const findUserService = async (username, password) => {
   // const userSearch = await User.findOne({ where: { username } });
   const userSearch = await User.findOne({ where: { username } });
 
-  if (!userSearch || userSearch.password !== password) return (
-    { status: 401, message: 'Usuário não existe ou senha inválida' }
-  );
+  /* Note que não chegamos a encriptar a senha que veio da requisição, nós simplesmente damos nossa senha pro bcrypt e ele faz essa comparação para nós. */
+  const isMatch = bcrypt.compareSync(password, userSearch.password);
+
+  if (!isMatch)
+    return { status: 401, message: 'Pessoa usuária não existe ou senha inválida'};
+
+  // if (!userSearch || userSearch.password !== password) return (
+  //   { status: 401, message: 'Usuário não existe ou senha inválida' }
+  // );
 
   /* Separamos a senha do resto, pois a senha de uma pessoa usuária **nunca deve ser incluída no token**, utilizamos um rest parameter aqui e também trocamos o nome da chave password, pois já recebemos um parâmetro com esse nome */
   const { password: passBD, ...userWithoutPassword } = userSearch.dataValues;
@@ -44,7 +51,13 @@ const createUserService = async (username, password) => {
     { status: 500, message: 'Erro ao salvar o usuário no banco' }
   );
 
-  await User.create({ username, password });
+  // Aqui definimos nosso parametro salt de nivel 5
+  const salt = bcrypt.genSaltSync(5);
+  // E geramos nosso hash através da biblioteca bcrypt
+  const encryptedPassword = bcrypt.hashSync(password, salt);
+  
+  // await User.crete({ username, password });
+  await User.create({ username, password: encryptedPassword });
 
   return ({ status: 201, message: 'Novo usuário cadastrado com sucesso!' });
 };
